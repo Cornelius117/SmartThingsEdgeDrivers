@@ -258,6 +258,12 @@ function DeviceConfiguration.match_profile(driver, device)
       {feature_bitmap = clusters.ValveConfigurationAndControl.types.Feature.LEVEL}) > 0 then
       profile_name = profile_name .. "-level"
     end
+    if device:supports_capability(capabilities.temperatureMeasurement) then
+      profile_name = profile_name .. "-temperature"
+    end
+    if device:supports_capability(capabilities.flowMeasurement) then
+      profile_name = profile_name .. "-flow"
+    end
   elseif #fan_eps > 0 then
     profile_name = "light-color-level-fan"
   end

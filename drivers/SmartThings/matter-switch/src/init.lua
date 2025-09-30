@@ -185,6 +185,11 @@ local matter_driver_template = {
         [clusters.ValveConfigurationAndControl.attributes.CurrentLevel.ID] = attribute_handlers.valve_configuration_current_level_handler,
         [clusters.ValveConfigurationAndControl.attributes.CurrentState.ID] = attribute_handlers.valve_configuration_current_state_handler,
       },
+      [clusters.FlowMeasurement.ID] = {
+        [clusters.FlowMeasurement.attributes.MeasuredValue.ID] = attribute_handlers.flow_attr_handler,
+        [clusters.FlowMeasurement.attributes.MinMeasuredValue.ID] = attribute_handlers.flow_attr_handler_factory(fields.FLOW_MIN),
+        [clusters.FlowMeasurement.attributes.MaxMeasuredValue.ID] = attribute_handlers.flow_attr_handler_factory(fields.FLOW_MAX)
+      },
     },
     event = {
       [clusters.Switch.ID] = {
@@ -256,6 +261,11 @@ local matter_driver_template = {
     },
     [capabilities.valve.ID] = {
       clusters.ValveConfigurationAndControl.attributes.CurrentState
+    },
+    [capabilities.flowMeasurement.ID] = {
+      clusters.FlowMeasurement.attributes.MeasuredValue,
+      clusters.FlowMeasurement.attributes.MinMeasuredValue,
+      clusters.FlowMeasurement.attributes.MaxMeasuredValue
     },
   },
   subscribed_events = {

@@ -96,6 +96,9 @@ SwitchFields.LEVEL_BOUND_RECEIVED = "__level_bound_received"
 SwitchFields.LEVEL_MIN = "__level_min"
 SwitchFields.LEVEL_MAX = "__level_max"
 SwitchFields.COLOR_MODE = "__color_mode"
+SwitchFields.FLOW_BOUND_RECEIVED = "__flow_bound_received"
+SwitchFields.FLOW_MIN = "__flow_min"
+SwitchFields.FLOW_MAX = "__flow_max"
 
 SwitchFields.updated_fields = {
   { current_field_name = "__component_to_endpoint_map_button", updated_field_name = SwitchFields.COMPONENT_TO_ENDPOINT_MAP },
@@ -184,6 +187,7 @@ SwitchFields.supported_capabilities = {
   capabilities.switchLevel,
   capabilities.temperatureMeasurement,
   capabilities.valve,
+  capabilities.flowMeasurement,
 }
 
 SwitchFields.device_type_attribute_map = {

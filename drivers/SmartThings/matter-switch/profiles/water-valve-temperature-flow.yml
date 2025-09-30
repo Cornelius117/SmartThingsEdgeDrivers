@@ -1,0 +1,16 @@
+name: water-valve
+components:
+- id: main
+  capabilities:
+  - id: valve
+    version: 1
+  - id: temperatureMeasurement
+    version: 1
+  - id: flowMeasurement
+    version: 1
+  - id: firmwareUpdate
+    version: 1
+  - id: refresh
+    version: 1
+  categories:
+  - name: WaterValve
