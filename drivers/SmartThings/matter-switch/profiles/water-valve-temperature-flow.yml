@@ -1,4 +1,4 @@
-name: water-valve
+name: water-valve-temperature-flow
 components:
 - id: main
   capabilities:

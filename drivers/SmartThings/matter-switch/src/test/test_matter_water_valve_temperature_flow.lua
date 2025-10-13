@@ -54,7 +54,6 @@ local mock_device = test.mock_device.build_test_matter_device({
 
 local cluster_subscribe_list = {
   clusters.ValveConfigurationAndControl.attributes.CurrentState,
-  --clusters.ValveConfigurationAndControl.attributes.CurrentLevel,
   clusters.TemperatureMeasurement.attributes.MeasuredValue,
   clusters.TemperatureMeasurement.attributes.MinMeasuredValue,
   clusters.TemperatureMeasurement.attributes.MaxMeasuredValue,
@@ -118,51 +117,7 @@ test.register_message_test(
     }
   }
 )
---[[
-test.register_message_test(
-  "Set level command should send the appropriate commands",
-  {
-    {
-      channel = "capability",
-      direction = "receive",
-      message = {
-        mock_device.id,
-        { capability = "level", component = "main", command = "setLevel", args = { 25 } }
-      }
-    },
-    {
-      channel = "matter",
-      direction = "send",
-      message = {
-        mock_device.id,
-        clusters.ValveConfigurationAndControl.server.commands.Open(mock_device, 1, nil, 25)
-      }
-    }
-  }
-)
 
-test.register_message_test(
-  "Set level command should send the appropriate commands",
-  {
-    {
-      channel = "capability",
-      direction = "receive",
-      message = {
-        mock_device.id,
-        { capability = "level", component = "main", command = "setLevel", args = { 0 } }
-      }
-    },
-    {
-      channel = "matter",
-      direction = "send",
-      message = {
-        mock_device.id,
-        clusters.ValveConfigurationAndControl.server.commands.Close(mock_device, 1)
-      }
-    }
-  }
-)
---]]
 test.register_message_test(
   "Current state reports should generate appropriate events",
   {
@@ -219,26 +174,7 @@ test.register_message_test(
     },
   }
 )
---[[
-test.register_message_test(
-  "Current level reports should generate appropriate events",
-  {
-    {
-      channel = "matter",
-      direction = "receive",
-      message = {
-        mock_device.id,
-        clusters.ValveConfigurationAndControl.server.attributes.CurrentLevel:build_test_report_data(mock_device, 1, 50)
-      }
-    },
-    {
-      channel = "capability",
-      direction = "send",
-      message = mock_device:generate_test_message("main", capabilities.level.level(50))
-    },
-  }
-)
---]]
+
 test.register_message_test(
   "Flow reports should generate correct messages",
   {
@@ -287,7 +223,6 @@ test.register_message_test(
 
 local function refresh_commands(dev)
   local req = clusters.ValveConfigurationAndControl.attributes.CurrentState:read(dev)
-  --req:merge(clusters.ValveConfigurationAndControl.attributes.CurrentLevel:read(dev))
   req:merge(clusters.TemperatureMeasurement.attributes.MeasuredValue:read(dev))
   req:merge(clusters.TemperatureMeasurement.attributes.MinMeasuredValue:read(dev))
   req:merge(clusters.TemperatureMeasurement.attributes.MaxMeasuredValue:read(dev))
