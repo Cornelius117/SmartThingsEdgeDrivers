@@ -69,6 +69,11 @@ local function test_init()
       subscribe_request:merge(cluster:subscribe(mock_device))
     end
   end
+  
+  test.socket.device_lifecycle:__queue_receive({ mock_device.id, "doConfigure" })
+  mock_device:expect_metadata_update({ profile = "water-valve-temperature-flow" })
+  mock_device:expect_metadata_update({ provisioning_state = "PROVISIONED" })
+
   test.socket.matter:__expect_send({mock_device.id, subscribe_request})
   test.mock_device.add_test_device(mock_device)
 end
