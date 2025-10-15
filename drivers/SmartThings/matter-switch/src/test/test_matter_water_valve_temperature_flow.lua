@@ -40,7 +40,7 @@ local mock_device = test.mock_device.build_test_matter_device({
         {
           cluster_id = clusters.ValveConfigurationAndControl.ID,cluster_type = "SERVER",
           cluster_revision = 1,
-          feature_map = 2
+          feature_map = 0
         },
         {cluster_id = clusters.TemperatureMeasurement.ID, cluster_type = "SERVER"},
         {cluster_id = clusters.FlowMeasurement.ID, cluster_type = "SERVER"},
@@ -69,7 +69,7 @@ local function test_init()
       subscribe_request:merge(cluster:subscribe(mock_device))
     end
   end
-  
+
   test.socket.device_lifecycle:__queue_receive({ mock_device.id, "doConfigure" })
   mock_device:expect_metadata_update({ profile = "water-valve-temperature-flow" })
   mock_device:expect_metadata_update({ provisioning_state = "PROVISIONED" })
